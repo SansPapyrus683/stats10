@@ -1,0 +1,100 @@
+---
+title: "Stats 10 Lab 1 Report Template"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Lab 1 
+
+## Q1
+
+1.  Create a code chunk below this question and print the statement:
+    "`My name is (your name) and my UID is (your UID). I am looking forward to Stats 10!`"
+```{r} 
+print("...")
+```
+  
+## Q2
+
+2.  Create a vector named `titles` and fill it with at least 3 book
+    titles. Print the vector `titles`.
+
+```{r}
+titles <- c("...")
+print(...)
+```
+
+## Q3
+
+3.  Run the code chunk below using `titles`. Read the error message and
+    explain why an error occurs.
+
+```{r, eval=FALSE}
+sum(titles)
+```
+
+
+ANSWER: ...
+
+## Q4
+
+4.  Create a vector named vector_log and make it hold the values TRUE,
+    FALSE, TRUE, FALSE. Try multiplying the values by 2 and using the
+    mean() function. Explain your results and how R treats logical
+    values.
+
+```{r}
+vector_log <- c(...)
+
+vector_log2 <- ...  #multiplying the values by 2
+
+mean(...)
+```
+
+EXPLAIN: 
+
+
+## Q5
+
+5.  You are given a vector containing the scores of 50 students on a
+    recent exam. Find the minimum, maximum, mean, and standard deviation
+    of the scores. Print each value (for example, print "Mean: \_\_\_").
+
+```{r}
+# You do not have to change this code
+set.seed(123456789)
+scores <- sample(0:100, 50, replace = TRUE)
+print(scores)
+```
+
+```{r}
+# Work in this code chunk!
+
+# min
+
+# max
+
+# mean
+
+# sd
+
+```
+
+## Q6
+Using the `scores` vector, find the mean value without using the `mean()` function. (Hint: The mean is calculated by finding the sum of all values and dividing by the total number of values.)
+
+```{r}
+# the sum of all values and dividing by the total number of values
+
+```
+
+-   Explain whether there is a difference between the means found in #5
+    and #6 and why it does or does not exist.
+    
+ANSWER: ...
+
