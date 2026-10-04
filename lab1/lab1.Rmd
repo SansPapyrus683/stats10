@@ -1,5 +1,5 @@
 ---
-title: "Stats 10 Lab 1 Report Template"
+title: "Stats 10 Lab 1 Report"
 output:
   pdf_document: default
   html_document: default
