@@ -1,0 +1,128 @@
+---
+title: "Stats 10 Lab 2 Report"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Questions
+
+1.  Reading the documentation of functions can be very useful when coding in R. We can find the documentation of functions using the help() function (for example, help(sum)).
+
+Load in the `births.csv` dataset, and then read the head() function documentation and use the head() function to display the first 10 rows of the `births.csv` dataset.
+
+**Read births.csv into RStudio**
+
+Make sure you have set RStudio's Working Directory to your STATS 10 lab folder:
+
+**Session** -\> **Set Working Directory** -\> **Choose Directory**
+
+```{r}
+# Read in births.csv with read.csv() and save it to the object births_df
+births_df <- read.csv("births.csv")
+```
+
+**Display the first ten rows**
+```{r}
+# Use head() to print out the first ten rows of the dataset
+head(births_df)
+```
+
+2.  Observe the code used to load in the iris dataset. Explain what the header and col.names arguments do.
+
+```{r}
+# IMPORTANT: You do not need to change anything in this chunk. Just run it!
+url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+# For reference
+iris_df <- read.csv(url,
+  header = FALSE,
+  col.names = c(
+    "Sepal.Length",
+    "Sepal.Width",
+    "Petal.Length",
+    "Petal.Width",
+    "Species"
+  )
+)
+```
+
+**Answer:** The `header` argument indicates that there is no header row in the provided CSV file, unlike with `births.csv`.
+To amend this, we provide our own names for the columns using the `col.names` argument.
+
+3.  Extract the `Sepal.Length` column from the iris dataset in two different ways.
+
+**Indexing by brackets**:
+```{r}
+# Use the data_frame_name[row, column] syntax
+# We want to retrieve ALL rows, but only the Sepal.Length column
+# Save the values under the column to the object sepal_len
+sepal_len <- iris_df[, "Sepal.Length"]
+
+# Use head() to print out the first few rows of the object
+head(sepal_len)
+```
+
+**Indexing by the** **`$`** **operator**:
+```{r}
+# Use the data_frame_name$column_name syntax
+# Save the values under the column to the object sepal_len
+sepal_len <- iris_df$Sepal.Length
+
+# Use head() to print out the first few rows of the object
+head(sepal_len)
+```
+
+4.  Go back to the births.csv dataset. Find the mean weight gain of the mothers.
+
+```{r}
+# Retrieve the weight gains under the column Gained in births_df
+# Use either of the approaches above to do so
+# Save the values to the object weights
+weights <- births_df$Gained
+
+# Use the mean() function to find the mean weight gain
+mean(weights)
+```
+
+- According to
+  [Brown Health](https://www.brownhealth.org/centers-services/multidisciplinary-obstetric-medicine-service-moms/pregnancy-weight-gain),
+  the average weight gain of a mother with a normal weight BMI is around 25-35 lbs.
+  Compare this to the value you found in births.csv.
+
+**Answer:** The mean I obtained seems directly in line with what Brown Health says.
+
+5. Create a vector named weights_kg that contains the weights of the infants in births.csv from ounce to kg.
+   Print the last 6 values of the vector.
+
+```{r}
+# Convert weight of infants (under column weight) in the birth dataset to kilograms
+# Save the converted values to the new object called weight_infant_kg
+# You can look up the conversion online
+weight_infant_kg <- births_df$weight / 35.274
+
+# Use tail() to print out the first last values of weight_infant_kg
+tail(weight_infant_kg)
+```
+
+6.  The airquality dataset has been loaded in for you below. Clean the airquality dataset by removing all rows with an NA value. (Hint: More than one column may hold NA values.)
+
+**Read in the air quality data**
+```{r}
+# Read in the air quality data and save it to the object airquality_df
+airquality_df <- airquality
+head(airquality_df)
+```
+
+**Clean the air quality data**
+```{r}
+# Use na.omit() to remove NA values under ALL columns in airquality
+# Save the cleaned data frame to the object airquality_cleaned_df
+airquality_cleaned_df <- na.omit(airquality_df)
+
+# Check if there is any NA values remaining in airquality_cleaned_df
+any(is.na(airquality_cleaned_df))
+```
