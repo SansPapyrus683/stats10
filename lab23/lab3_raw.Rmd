@@ -1,0 +1,148 @@
+---
+title: "Stats 10 Lab 3 Report Template"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Lab 3 Report
+
+## Question 1
+
+1.  Create a side-by-side boxplot of the weight column conditioned on
+    the Habit variable. Based on the graph, do you see any major
+    differences between baby weights from smoking moms vs. non-smoking
+    moms?
+
+```{r}
+# Read in births.csv with read.csv() and save it to the object births_df
+births_df <- read.csv(...)
+
+boxplot(births_df$... ~ births_df$...)
+```
+
+**Answer:** *Delete this text and type in your answer.*
+
+
+## Question 2
+
+2.  Produce three different histograms of the weights Use 5
+    bins, 20 bins, and 100 bins. Which histogram seems to give the best
+    visualization, and why?
+
+```{r}
+# 5 bins
+hist(births_df$..., 
+     breaks = seq(min(births_df$...), max(births_df$...), length.out = 6))
+
+# 20 bins
+hist(..., 
+     breaks = seq(min(births_df$...), max(births_df$...), length.out = ...))
+
+# 100 bins
+hist(..., breaks = ...)
+```
+
+**Answer:** *Delete this text and type in your answer.*
+
+
+## Question 3
+
+3.  Repeat question #2, but include the optional argument `prob = TRUE`
+    when creating the histogram. Compare the two histograms. What is
+    similar, and what is different?
+
+```{r}
+# add the optional argument `prob = TRUE`
+# 5 bins
+hist(births_df$..., 
+     breaks = seq(min(births_df$...), max(births_df$...), length.out = 6),
+     prob = TRUE)
+
+# 20 bins
+hist(..., 
+     breaks = seq(min(births_df$...), max(births_df$...), length.out = ...),
+     prob = ...)
+
+# 100 bins
+hist(..., breaks = ..., prob = ...)
+```
+
+**Answer:** *Delete this text and type in your answer.*
+
+
+## Question 4
+
+4.  Produce a nicely formatted scatter plot (with labels and a title) of the weight of the baby and age of the mother.
+
+```{r}
+plot(births_df$... ~ births_df$..., main = "...", 
+     xlab = "...", ylab = "...")
+
+```
+
+## Question 5
+
+5.  Run the following code. Explain the difference between table 1 and
+    table 2.
+
+```{r}
+# Do not edit this code
+births_table <-table(births_df$Racemom,births_df$Racedad)
+print(births_table)
+
+# Table 1
+table_1 <- prop.table(births_table, margin = 1)
+print(table_1)
+
+# Table 2
+table_2 <- prop.table(births_table, margin = 2)
+print(table_2)
+
+```
+
+**Answer:** *Delete this text and type in your answer.*
+
+
+## Question 6
+
+6.  What percentage of the mothers in the sample smoke? 
+According to the Center for Disease Control (CDC), approximately 21% of adult Americans smoke. How far off is the percentage you found from the CDC's report?
+
+```{r}
+births_table <- table(births_df$...)
+table_smoke <- ...
+print(table_smoke)
+
+```
+
+**Answer:** *Delete this text and type in your answer.*
+
+
+## Question 7
+
+7.  Find and print the Measures of Variability for the `Gained` column.
+    Explain what each value tells you about the data.
+    
+```{r}
+summary(...)
+
+# Range = max - min
+...(births_df$...) - ...(births_df$...)
+
+# IQR
+IQR(...)
+
+# Variance
+var(...)
+
+# Standard Deviation
+sd(...)
+```
+
+**Answer:** *Delete this text and type in your answer.*
