@@ -1,0 +1,157 @@
+---
+title: "Stats 10 Lab 3 Report"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Lab 3 Report
+
+## Question 1
+
+1.  Create a side-by-side boxplot of the weight column conditioned on
+    the Habit variable. Based on the graph, do you see any major
+    differences between baby weights from smoking moms vs. non-smoking
+    moms?
+
+```{r}
+# Read in births.csv with read.csv() and save it to the object births_df
+births_df <- read.csv("births.csv")
+
+boxplot(births_df$weight ~ births_df$Habit)
+```
+
+**Answer:** From the box plot, it seems that non-smoking mothers give
+birth to slightly heavier babies, though there are a lot of outliers
+in the non-smoking dataset.
+
+
+## Question 2
+
+2.  Produce three different histograms of the weights Use 5
+    bins, 20 bins, and 100 bins. Which histogram seems to give the best
+    visualization, and why?
+
+```{r}
+weight <- births_df$weight # shorthand for convenience
+
+# 5 bins
+hist(weight, breaks = seq(min(weight), max(weight), length.out = 5 + 1))
+
+# 20 bins
+hist(weight, breaks = seq(min(weight), max(weight), length.out = 20 + 1))
+
+# 100 bins
+hist(weight, breaks = seq(min(weight), max(weight), length.out = 100 + 1))
+```
+
+**Answer:** The 20-bin histogram gives the best visualization IMO.
+The 5-bin one was too coarse and gave only the vaguest idea of a left skew,
+while the 100-bin one was so fine there were almost "gaps" between the bars.
+
+
+## Question 3
+
+3.  Repeat question #2, but include the optional argument `prob = TRUE`
+    when creating the histogram. Compare the two histograms. What is
+    similar, and what is different?
+
+```{r}
+# add the optional argument `prob = TRUE`
+# 5 bins
+hist(weight, breaks = seq(min(weight), max(weight), length.out = 5 + 1), prob = TRUE)
+
+# 20 bins
+hist(weight, breaks = seq(min(weight), max(weight), length.out = 20 + 1), prob = TRUE)
+
+# 100 bins
+hist(weight, breaks = seq(min(weight), max(weight), length.out = 100 + 1), prob = TRUE)
+```
+
+**Answer:** Everything is the same except for the y-axis, which
+now indicates relative frequency instead of absolute frequency.
+
+
+## Question 4
+
+4.  Produce a nicely formatted scatter plot (with labels and a title) of the weight of the baby and age of the mother.
+
+```{r}
+plot(births_df$weight ~ births_df$Mage,
+  main = "Baby weight vs. mother age",
+  xlab = "Mother age (years)", ylab = "Baby weight (oz)"
+)
+```
+
+## Question 5
+
+5.  Run the following code. Explain the difference between table 1 and
+    table 2.
+
+```{r}
+# Do not edit this code
+births_table <- table(births_df$Racemom, births_df$Racedad)
+print(births_table)
+
+# Table 1
+table_1 <- prop.table(births_table, margin = 1)
+print(table_1)
+
+# Table 2
+table_2 <- prop.table(births_table, margin = 2)
+print(table_2)
+```
+
+**Answer:** Table 1 gives the relative frequencies of the dad's races after
+conditioning on the mom's race, while table 2 gives the relative
+frequencies of the *mom's* races after conditioning on the dad's race.
+
+
+## Question 6
+
+6.  What percentage of the mothers in the sample smoke? 
+According to the Center for Disease Control (CDC), approximately 21% of adult Americans smoke. How far off is the percentage you found from the CDC's report?
+
+```{r}
+births_table <- table(births_df$Habit)
+table_smoke <- proportions(births_table)
+print(table_smoke)
+```
+
+**Answer:** Around 9.4% of mothers in the given sample smoke.
+
+
+## Question 7
+
+7.  Find and print the Measures of Variability for the `Gained` column.
+    Explain what each value tells you about the data.
+    
+```{r}
+gained <- births_df$Gained  # another shorthand for convenience
+
+summary(gained)
+
+# Range = max - min
+max(gained) - min(gained)
+
+# IQR
+IQR(gained)
+
+# Variance
+var(gained)
+
+# Standard Deviation
+sd(gained)
+```
+
+**Answer:**
+
+* **Range**: The weight gain of the mothers spanned a range of 84 pounds.
+* **IQR**: The weight gain of the middle 50% of the mothers only spanned 17 pounds, though.
+* **Variance**: The average squared differences of all the mother's weight gains and the mean was 180.61.
+* **SD**: On average, a mother's weight gain would be around 13.4 lbs from the mean.
