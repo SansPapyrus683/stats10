@@ -1,0 +1,182 @@
+---
+title: "Lab 4 Report Template"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Read in the mtcars dataset:
+
+Make sure you have set RStudio's Working Directory to your STATS 10 Lab Folder:
+
+**Session** -\> **Set Working Directory** -\> **Choose Directory**
+
+**IMPORTANT: Run the chunk below FIRST! We will need this data to complete the lab!**
+
+```{r}
+# Glossary:
+# mpg: Miles/(US) gallon
+# cyl: Number of cylinders
+# disp: Displacement (cu.in.)
+# hp: Gross horsepower
+# drat: Rear axle ratio
+# wt: Weight (1000 lbs)
+# qsec: 1/4 mile time
+# vs: Engine (0 = V-shaped, 1 = straight)
+# am: Transmission (0 = automatic, 1 = manual)
+# gear: Number of forward gears 
+# carb: Number of carburetors
+# Source: https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars
+
+mtcars_df <- mtcars
+head(mtcars_df)
+```
+
+# Code Examples (this part is to assist you with the report, do not include in your submission)
+
+## Scatterplot
+```{r}
+# y ~ x means that we are plotting the variables y on the y-axis and x on the x-axis
+# We use these arguments to plot the data and label the scatter plot:
+# main: Title the plot (character)
+# xlab: Label the horizontal or x-axis (character)
+# ylab: Label the vertical or y-axis (character)
+# col: The colors of the points (character); see https://r-charts.com/colors/
+# pch: The symbols of the points (numerical); see https://r-charts.com/base-r/pch-symbols/
+# cex: The sizes of the points (numerical)
+
+plot(
+  mtcars_df$mpg ~ mtcars_df$wt,
+  main = "Miles per Gallon versus Weight",
+  xlab = "Weight (1000 lbs)",
+  ylab = "Miles per Gallon",
+  col = "red",
+  pch = 3,
+  cex = 1.5
+)
+```
+
+## Correlation
+```{r}
+# cor(): Return the correlation coefficient between two vectors
+cor(mtcars_df$mpg, mtcars_df$wt)
+```
+
+## Simple Linear Regression Models
+```{r}
+# lm: Fit a linear model.
+# y ~ x: Specify that y and x are your DEPENDENT and INDEPENDENT variables
+# data: The data frame or table from which we are pulling the values
+# summary(): Print a summary table for the model
+# You can read the goodness of fit (R-squared) from the summary table
+linear_model <- lm(mpg ~ wt, data = mtcars_df)
+summary(linear_model)
+```
+
+## Plotting Regression Lines
+```{r}
+# We use abline(model_name) to add regression lines to scatterplots
+# Below, we have the same scatterplot as above.
+# We use abline(linear_model) to add the regression line to it.
+# lwd: Line width
+# lty: Line type (lty = 2 makes dashed lines); see https://r-charts.com/base-r/line-types/
+
+plot(
+  mtcars_df$mpg ~ mtcars_df$wt,
+  main = "Miles per Gallon versus Weight",
+  xlab = "Weight (1000 lbs)",
+  ylab = "Miles per Gallon",
+  col = "red",
+  pch = 3,
+  cex = 1.5
+)
+abline(linear_model, lwd = 1.5, lty = 2)
+```
+# this part is to assist you with the report, do not include in your submission
+---
+
+# Lab Exercises
+
+Question 1. Explain the difference between the correlation coefficient and the goodness of fit value.
+
+**Answer:** *Delete this text and type in your answer.*
+
+Question 2. Choose two variables other than `mpg` and `wt` from the mtcars dataset (you can use only one of `mpg` or `wt`). Create a scatterplot and calculate/print the correlation coefficient. Interpret the correlation coefficient for your chosen two variables.
+
+**Scatterplot**
+```{r}
+# Fill in the dots based on the two variables you choose!
+# Scroll up to the "Scatterplot" example to see how.
+
+plot(
+  mtcars_df$... ~ mtcars_df$...,
+  main = "...",
+  xlab = "...",
+  ylab = "...",
+  col = "red",
+  pch = 3,
+  cex = 1.5
+)
+```
+
+**Correlation**
+```{r}
+# Fill in the dots based on the two variables you choose!
+# Scroll up to the "Correlation" example to see how.
+
+cor(mtcars_df$..., mtcars_df$...)
+```
+
+**Answer:** *Delete this text and type in your answer.*
+
+Question 3. Using the same two variables from **Question 2**, create a linear regression line and plot it on the scatterplot. What is the intercept and slope coefficients, and what do they mean in the context of the data?
+
+**Linear Regression**
+```{r}
+# Fill in the dots based on the variables you choose!
+# Scroll up to the "Simple Linear Regression Models" example to see how.
+
+mtcars_model <- lm(... ~ ..., data = mtcars_df)
+summary(mtcars_model)
+```
+
+**Regression Line**
+```{r}
+# Exactly the same scatterplot code as in Question 2
+# We only add abline(mtcars_model) at the end to add the line
+
+plot(
+  mtcars_df$... ~ mtcars_df$...,
+  main = "...",
+  xlab = "...",
+  ylab = "...",
+  col = "red",
+  pch = 3,
+  cex = 1.5
+)
+abline(mtcars_model, lwd = 1.5, lty = 2)
+```
+
+**Answer:** *Delete this text and type in your answer.*
+
+Question 4. Explain whether the linear regression line is a good model for the chosen variables from **Question 2**. 
+
+**Answer:** *Delete this text and type in your answer.*
+
+Question 5. Using the same two variables from **Question 2**, find the correlation coefficient without using the `cor()` function. Check with your answer in **Question 2**.
+
+```{r}
+# Hints:
+# 1. What will taking the square root of the R-squared yield?
+# From which table can you get the R-squared?
+# 2. Remember that the correlation coefficient has a sign.
+# From which plot can you see the direction of the relationship? 
+
+## code here (OPTIONAL)
+```
+
+**Answer:** *Delete this text and type in your answer.*

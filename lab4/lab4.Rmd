@@ -1,0 +1,244 @@
+---
+title: "Lab 4 Report"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Read in the mtcars dataset:
+
+Make sure you have set RStudio's Working Directory to your STATS 10 Lab Folder:
+
+**Session** -\> **Set Working Directory** -\> **Choose Directory**
+
+**IMPORTANT: Run the chunk below FIRST! We will need this data to complete the lab!**
+
+```{r}
+# Glossary:
+# mpg: Miles/(US) gallon
+# cyl: Number of cylinders
+# disp: Displacement (cu.in.)
+# hp: Gross horsepower
+# drat: Rear axle ratio
+# wt: Weight (1000 lbs)
+# qsec: 1/4 mile time
+# vs: Engine (0 = V-shaped, 1 = straight)
+# am: Transmission (0 = automatic, 1 = manual)
+# gear: Number of forward gears
+# carb: Number of carburetors
+# Source: https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars
+
+mtcars_df <- mtcars
+head(mtcars_df)
+```
+
+# Code Examples (this part is to assist you with the report, do not include in your submission)
+
+## Scatterplot
+```{r}
+# y ~ x means that we are plotting the variables y on the y-axis and x on the x-axis
+# We use these arguments to plot the data and label the scatter plot:
+# main: Title the plot (character)
+# xlab: Label the horizontal or x-axis (character)
+# ylab: Label the vertical or y-axis (character)
+# col: The colors of the points (character); see https://r-charts.com/colors/
+# pch: The symbols of the points (numerical); see https://r-charts.com/base-r/pch-symbols/
+# cex: The sizes of the points (numerical)
+
+plot(
+  mtcars_df$mpg ~ mtcars_df$wt,
+  main = "Miles per Gallon versus Weight",
+  xlab = "Weight (1000 lbs)",
+  ylab = "Miles per Gallon",
+  col = "red",
+  pch = 3,
+  cex = 1.5
+)
+```
+
+## Correlation
+```{r}
+# cor(): Return the correlation coefficient between two vectors
+cor(mtcars_df$mpg, mtcars_df$wt)
+```
+
+## Simple Linear Regression Models
+```{r}
+# lm: Fit a linear model.
+# y ~ x: Specify that y and x are your DEPENDENT and INDEPENDENT variables
+# data: The data frame or table from which we are pulling the values
+# summary(): Print a summary table for the model
+# You can read the goodness of fit (R-squared) from the summary table
+linear_model <- lm(mpg ~ wt, data = mtcars_df)
+summary(linear_model)
+```
+
+## Plotting Regression Lines
+```{r}
+# We use abline(model_name) to add regression lines to scatterplots
+# Below, we have the same scatterplot as above.
+# We use abline(linear_model) to add the regression line to it.
+# lwd: Line width
+# lty: Line type (lty = 2 makes dashed lines); see https://r-charts.com/base-r/line-types/
+
+plot(
+  mtcars_df$mpg ~ mtcars_df$wt,
+  main = "Miles per Gallon versus Weight",
+  xlab = "Weight (1000 lbs)",
+  ylab = "Miles per Gallon",
+  col = "red",
+  pch = 3,
+  cex = 1.5
+)
+abline(linear_model, lwd = 1.5, lty = 2)
+```
+# this part is to assist you with the report, do not include in your submission
+---
+
+# Lab Exercises
+
+Question 1. Explain the difference between the correlation coefficient and the goodness of fit value.
+
+**Answer:** The goodness of fit is the square of the correlation coefficient and explains
+how much of the variation in the dependent variable is explained by the independent variable.
+
+Question 2. Choose two variables other than `mpg` and `wt` from the mtcars dataset (you can use only one of `mpg` or `wt`).
+Create a scatterplot and calculate/print the correlation coefficient. Interpret the correlation coefficient for your chosen two variables.
+
+**Scatterplot**
+```{r}
+# Fill in the dots based on the two variables you choose!
+# Scroll up to the "Scatterplot" example to see how.
+
+plot(
+  mtcars_df$mpg ~ mtcars_df$hp,
+  main = "Miles per Gallon versus Horsepower",
+  xlab = "Gross Horsepower",
+  ylab = "Miles per Gallon",
+  col = "red",
+  pch = 3,
+  cex = 1.5
+)
+```
+
+**Correlation**
+```{r}
+# Fill in the dots based on the two variables you choose!
+# Scroll up to the "Correlation" example to see how.
+
+cor(mtcars_df$mpg, mtcars_df$hp)
+```
+
+**Answer:** There's a strong negative correlation between MPG and gross horsepower.
+
+Question 3. Using the same two variables from **Question 2**, create a linear regression line and plot it on the scatterplot.
+What is the intercept and slope coefficients, and what do they mean in the context of the data?
+
+**Linear Regression**
+```{r}
+# Fill in the dots based on the variables you choose!
+# Scroll up to the "Simple Linear Regression Models" example to see how.
+
+mtcars_model <- lm(mpg ~ hp, data = mtcars_df)
+summary(mtcars_model)
+```
+
+**Regression Line**
+```{r}
+# Exactly the same scatterplot code as in Question 2
+# We only add abline(mtcars_model) at the end to add the line
+
+plot(
+  mtcars_df$mpg ~ mtcars_df$hp,
+  main = "Miles per Gallon versus Horsepower",
+  xlab = "Gross Horsepower",
+  ylab = "Miles per Gallon",
+  col = "red",
+  pch = 3,
+  cex = 1.5
+)
+abline(mtcars_model, lwd = 1.5, lty = 2)
+```
+
+**Answer:** The intercept is 30.09 MPG, and the slope is -0.068 MPG per gross horsepower.
+Since the data doesn't contain 0 horsepower, we can't really assign any meaning to it.
+We can still interpret the slope, though.
+It indicates that for each increase by 1 in gross horsepower
+the MPG of a car decreases on average by -0.068 MPG.
+
+Question 4. Explain whether the linear regression line is a good model for the chosen variables from **Question 2**. 
+
+```{r}
+plot(mtcars_model, which = 1)
+```
+
+**Answer:** The residuals appear to be randomly scattered around 0 with no apparent
+pattern, so combined with the high r-value we can conclude that the LR line
+is a decent model for MPG vs HP.
+
+Question 5. Using the Iris dataset from Lab 2, create a scatterplot of two variables of your choosing with
+a linear regression line. Is the linear regression model a good fit? Explain your answer. (Hint:
+You may want to use a Residual Plot to support your explanation.)
+
+Let's load in the dataset first:
+```{r}
+url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+iris_df <- read.csv(url,
+  header = FALSE,
+  col.names = c(
+    "Sepal.Length",
+    "Sepal.Width",
+    "Petal.Length",
+    "Petal.Width",
+    "Species"
+  )
+)
+```
+
+and then create our scatterplot and linear model:
+```{r}
+iris_model <- lm(Petal.Length ~ Sepal.Length, data = iris_df)
+summary(iris_model)
+```
+
+```{r}
+plot(
+  iris$Petal.Length ~ iris$Sepal.Length,
+  main = "Petal Length vs Sepal Length",
+  xlab = "Sepal Length",
+  ylab = "Petal Length",
+  col = "red",
+  pch = 3,
+  cex = 1.5
+)
+abline(iris_model, lwd = 1.5, lty = 2)
+```
+
+Finally, we can use the residual plot to analyze the quality of the fit:
+```{r}
+plot(iris_model, which = 1)
+```
+
+Although the R-squared value is decent, there does some to be some sort of pattern
+going on in the residual plot, with two generally parallel trends slanting down.
+I can only say that it's a decent fit.
+
+Question 6. Using the same variables in the Iris dataset from #5, find the correlation coefficient without
+using the cor() function. Interpret the correlation coefficient in terms of the two variables.
+```{r}
+# Shorthands
+petal <- iris_df$Petal.Length
+sepal <- iris_df$Sepal.Length
+
+z_petal <- (petal - mean(petal)) / sd(petal)
+z_sepal <- (sepal - mean(sepal)) / sd(sepal)
+r <- 1 / (nrow(iris_df) - 1) * sum(z_petal * z_sepal)
+
+sprintf("Manual r-value: %f", r)
+sprintf("Internal r-value: %f", cor(petal, sepal))
+```
+The r-value indicates a strong positive correlation between the petal length and sepal length.
