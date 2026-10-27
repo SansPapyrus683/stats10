@@ -101,11 +101,9 @@ abline(linear_model, lwd = 1.5, lty = 2)
 
 # Lab Exercises
 
-Question 1. Explain the difference between the correlation coefficient and the goodness of fit value.
+## Question 1
 
-**Answer:** *Delete this text and type in your answer.*
-
-Question 2. Choose two variables other than `mpg` and `wt` from the mtcars dataset (you can use only one of `mpg` or `wt`). Create a scatterplot and calculate/print the correlation coefficient. Interpret the correlation coefficient for your chosen two variables.
+Choose two variables other than `mpg` and `wt` from the mtcars dataset (you can use only one of `mpg` or `wt`). Create a scatterplot and calculate/print the correlation coefficient. Interpret the correlation coefficient for your chosen two variables.
 
 **Scatterplot**
 ```{r}
@@ -133,7 +131,9 @@ cor(mtcars_df$..., mtcars_df$...)
 
 **Answer:** *Delete this text and type in your answer.*
 
-Question 3. Using the same two variables from **Question 2**, create a linear regression line and plot it on the scatterplot. What is the intercept and slope coefficients, and what do they mean in the context of the data?
+## Question 2
+
+Using the same two variables from **Question 2**, create a linear regression line and plot it on the scatterplot. What is the intercept and slope coefficients, and what do they mean in the context of the data?
 
 **Linear Regression**
 ```{r}
@@ -163,11 +163,46 @@ abline(mtcars_model, lwd = 1.5, lty = 2)
 
 **Answer:** *Delete this text and type in your answer.*
 
-Question 4. Explain whether the linear regression line is a good model for the chosen variables from **Question 2**. 
+## Question 3
+
+Explain the difference between the correlation coefficient and the goodness of fit value.
 
 **Answer:** *Delete this text and type in your answer.*
 
-Question 5. Using the same two variables from **Question 2**, find the correlation coefficient without using the `cor()` function. Check with your answer in **Question 2**.
+## Question 4
+
+Explain whether the linear regression line is a good model for the chosen variables from **Question 2**. 
+
+**Answer:** *Delete this text and type in your answer.*
+
+## Question 5
+
+5.  Using the Iris dataset from Lab 2, create a scatterplot of two
+    variables of your choosing with a linear regression line. Is the
+    linear regression model a good fit? Explain your answer. (Hint: You
+    may want to use a Residual Plot to support your explanation.)
+
+```{r}
+url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+iris_df <- read.csv(..., header = FALSE, col.names = ...)
+
+yourmodel <- lm(...)
+# display scatterplot
+plot(... ~ ...)
+# display the fitted regression line
+abline(...)
+
+# residual plot
+plot(... ~ ..., main = "Residuals Plot")
+# display the horizontal line at 0 by setting values to 0
+abline(a = ..., b = ..., col = "red", lwd = 2) 
+```
+
+**Answer:** *Delete this text and type in your answer.*
+
+## Question 6
+
+Using the same two variables from **Question 2**, find the correlation coefficient without using the `cor()` function. Check with your answer in **Question 2**.
 
 ```{r}
 # Hints:
